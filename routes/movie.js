@@ -65,6 +65,7 @@ router.delete('/:movie_id',(req,res,next)=>{
         res.json(data);
     });
 });
+//Between 
 router.get('/:start_year/:end_year',(req,res,next)=>{
     const {start_year,end_year} = req.params;
     Movie.find({
@@ -72,9 +73,12 @@ router.get('/:start_year/:end_year',(req,res,next)=>{
     },(err,data)=>{
         if(err)
             next({error:err.message});
-        if(!data)
+        if(data.length===0){
             next({message:'Bu tarihler arasında kayıt bulunamadı!'});
-        res.json(data);    
+        }else{
+            res.json(data);   
+        }
+         
     });
 });
 module.exports=router;
