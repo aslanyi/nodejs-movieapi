@@ -1,0 +1,25 @@
+{
+  "name": "nodejs-movieapi",
+  "version": "1.0.0",
+  "description": "Movie API\r İlk NodeJS Uygulaması",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aslanyi/nodejs-movieapi.git"
+  },
+  "author": "Taha",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aslanyi/nodejs-movieapi/issues"
+  },
+  "homepage": "https://github.com/aslanyi/nodejs-movieapi#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "mongoose": "^5.2.12",
+    "pug": "^2.0.3"
+  }
+}
