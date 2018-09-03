@@ -13,8 +13,8 @@ app.use(bodyParser.urlencoded({extended:true}))
 app.use('/api/movie',movie);
 
 app.use((err,req,res,next)=>{
-    res.status(err.status);
-    res.send(err.status);
+    res.status(err.status || 500);
+    res.json({error:{message:err.message}});
 })
 
 const server =app.listen(3000,()=>{
