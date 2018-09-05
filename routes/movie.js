@@ -1,12 +1,63 @@
+const mongoose=require('mongoose');
 const express = require('express');
 const router = express.Router();
 
 const Movie = require('../models/Movie');
 //GET all Movies
 router.get('/',(req,res,next)=>{
-    Movie.find({},(err,data)=>{
-        res.json(data);
-    })
+    Movie.aggregate([
+        {
+            $lookup:{
+                from:'directors',
+                localField:'director_id',
+                foreignField:'_id',
+                as:'director'
+            }
+        },
+        {
+            $unwind:{
+                path:'$director',
+                preserveNullAndEmptyArrays:true
+            }
+        },
+        {
+            $group:{
+                _id:{
+                    _id:'$_id',
+                    title:'$title',
+                    category:'$category',
+                    country:'$country',
+                    year:'$year',
+                    imdb_score:'$imdb_score',
+                },
+                director:{
+                    $push:'$director'
+                }
+            }
+        },
+        {
+            $project:{
+                _id:'$_id._id',
+                title:'$_id.title',
+                category:'$_id.category',
+                country:'$_id.country',
+                year:'$_id.year',
+                imdb_score:'$_id.imdb_score',
+                director:'$director'
+            }
+        }
+    ],(err,data)=>{
+        if(err){
+            next({message:err.message});
+        }
+        else if(data.length===0)
+        {
+            next({message:'Data yok.'});
+        }
+        else{
+            res.json(data);
+        }
+    });
 });
 //Get TOP10 Movie
 router.get('/top10',(req,res,next)=>{
@@ -19,14 +70,63 @@ router.get('/top10',(req,res,next)=>{
 });
 //Get one movie
 router.get('/:movie_id',(req,res,next)=>{
-    Movie.findById(req.params.movie_id,(err,data)=>{
-        if(err)
-            res.json(err);
-        if(!data)
+    Movie.aggregate([
         {
-            next({message:'Aradığınız film yok.'});
+            $match:{
+               '_id': mongoose.Types.ObjectId(req.params.movie_id)
+            }
+        },
+        {
+            $lookup:{
+                from:'directors',
+                localField:'director_id',
+                foreignField:'_id',
+                as:'director'
+            }
+        },
+        {
+            $unwind:{
+                path:'$director',
+                preserveNullAndEmptyArrays:true
+            }
+        },
+        {
+            $group:{
+                _id:{
+                    _id:'$_id',
+                    title:'$title',
+                    category:'$category',
+                    country:'$country',
+                    year:'$year',
+                    imdb_score:'$imdb_score',
+                },
+                director:{
+                    $push:'$director'
+                }
+            }
+        },
+        {
+            $project:{
+                _id:'$_id._id',
+                title:'$_id.title',
+                category:'$_id.category',
+                country:'$_id.country',
+                year:'$_id.year',
+                imdb_score:'$_id.imdb_score',
+                director:'$director'
+            }
         }
-        res.json(data);
+    ],(err,data)=>{
+        if(err){
+            next({message:err.message});
+        }
+        else if(data.length===0)
+        {
+            next({message:'Data yok.'});
+        }
+        else{
+            res.json(data);
+        }
     });
 })
 //SAVE Movie in db
