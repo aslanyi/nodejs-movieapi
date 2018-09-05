@@ -5,7 +5,7 @@ const Schema =mongoose.Schema;
 const director = new Schema({
     name:{
         type:String,
-        require:[true,'{PATH} alanı gereklidir.'],
+        required:[true,'{PATH} alanı gereklidir.'],
         maxlength:[20,'{PATH} alanı {MAXLENGTH} karakteri geçemez.']
     },
     surname:String,

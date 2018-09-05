@@ -9,7 +9,7 @@ const director = new Director(req.body);
 
 director.save((err,data)=>{
     if(err)
-        throw err;
+        next({message:err.message});
     res.json(data);
 });
 
