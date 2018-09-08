@@ -7,16 +7,24 @@ const db = require('./helper/db')();
 const movie = require('./routes/movie');
 const director = require('./routes/director');
 const user = require('./routes/user');
+const config = require('./config');
+const verifyToken = require('./middleware/jwt-verify');
+app.set('api_secret_key',config.api_secret_key);
 app.set('view engine','pug');
 app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}))
+app.use('/api',verifyToken);
 app.use('/api/user',user);
 app.use('/api/movie',movie);
 app.use('/api/director',director);
 app.use((err,req,res,next)=>{
     res.status(err.status || 500);
-    res.json({error:{message:err.message}});
+    if(err)
+    {
+        res.json({message:err.message});
+    }
+    next();
 })
 
 const server =app.listen(3000,()=>{

@@ -17,8 +17,10 @@
   },
   "homepage": "https://github.com/aslanyi/nodejs-movieapi#readme",
   "dependencies": {
+    "bcrypt": "^3.0.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
+    "jsonwebtoken": "^8.3.0",
     "mongoose": "^5.2.12",
     "pug": "^2.0.3"
   }
