@@ -70,72 +70,23 @@ router.get('/top10',(req,res,next)=>{
 });
 //Get one movie
 router.get('/:movie_id',(req,res,next)=>{
-    Movie.aggregate([
-        {
-            $match:{
-               '_id': mongoose.Types.ObjectId(req.params.movie_id)
-            }
-        },
-        {
-            $lookup:{
-                from:'directors',
-                localField:'director_id',
-                foreignField:'_id',
-                as:'director'
-            }
-        },
-        {
-            $unwind:{
-                path:'$director',
-                preserveNullAndEmptyArrays:true
-            }
-        },
-        {
-            $group:{
-                _id:{
-                    _id:'$_id',
-                    title:'$title',
-                    category:'$category',
-                    country:'$country',
-                    year:'$year',
-                    imdb_score:'$imdb_score',
-                },
-                director:{
-                    $push:'$director'
-                }
-            }
-        },
-        {
-            $project:{
-                _id:'$_id._id',
-                title:'$_id.title',
-                category:'$_id.category',
-                country:'$_id.country',
-                year:'$_id.year',
-                imdb_score:'$_id.imdb_score',
-                director:'$director'
-            }
-        }
-    ],(err,data)=>{
-        if(err){
-            next({message:err.message});
-        }
-        else if(data.length===0)
-        {
-            next({message:'Data yok.'});
-        }
-        else{
-            res.json(data);
-        }
-    });
-})
+   Movie.findById(req.params.movie_id,(err,data)=>{
+    if(err)
+    {
+        next({message:err.message});
+    }
+    else{
+        res.json(data);
+    }
+   });
+});
 //SAVE Movie in db
 router.post('/',(req,res,next)=>{
     // const {title,category,country,year,imdb_score} = req.body;
     const movie = new Movie(req.body);
     const promise = movie.save();
     promise.then((data)=>{
-        res.json({status : 1});
+        res.json(data);
     }).catch((err)=>{
         if(err)
             res.json(err);

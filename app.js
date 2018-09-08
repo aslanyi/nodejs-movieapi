@@ -15,7 +15,7 @@ app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}))
 app.use('/api',verifyToken);
-app.use('/api/user',user);
+app.use('/',user);
 app.use('/api/movie',movie);
 app.use('/api/director',director);
 app.use((err,req,res,next)=>{
