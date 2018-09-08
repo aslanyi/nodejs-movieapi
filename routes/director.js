@@ -4,7 +4,7 @@ const router = express.Router();
 
 const Director = require('../models/Director');
 //add director
-router.post('/addDirector',(req,res,next)=>{
+router.post('/',(req,res,next)=>{
 const director = new Director(req.body);
 
 director.save((err,data)=>{
@@ -132,7 +132,7 @@ router.get('/:directorId',(req,res,next)=>{
     });
 });
 //Update
-router.put('/update/:directorId',(req,res,next)=>{
+router.put('/:directorId',(req,res,next)=>{
     Director.findByIdAndUpdate(req.params.directorId,req.body,{
         new:true
     },(err,data)=>{
@@ -149,7 +149,7 @@ router.put('/update/:directorId',(req,res,next)=>{
     });
 });
 //Delete
-router.delete('/delete/:directorId',(req,res,next)=>{
+router.delete('/:directorId',(req,res,next)=>{
     Director.findByIdAndRemove(req.params.directorId,(err,data)=>{
         if(err)
         {
