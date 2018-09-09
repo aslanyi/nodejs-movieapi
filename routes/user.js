@@ -1,9 +1,9 @@
 const express= require('express'),
       router = express.Router();
 
-
+      const bcrypt = require('bcrypt');
 const User = require('../models/User');
-const bcrypt = require('bcrypt');
+
 const jwt = require('jsonwebtoken');
 router.get('/',(req,res,next)=>{
        res.send('get user'); 
