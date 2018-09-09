@@ -4,7 +4,8 @@
   "description": "Movie API\r İlk NodeJS Uygulaması",
   "main": "app.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "start": "node ./app"
   },
   "repository": {
     "type": "git",
