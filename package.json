@@ -13,9 +13,9 @@
     "chai-http": "^4.2.0",
     "express": "^4.16.3",
     "jsonwebtoken": "^8.3.0",
+    "mocha": "^5.2.0",
     "mongoose": "^5.2.12",
-    "pug": "^2.0.3",
-    "mocha": "^5.2.0"
+    "pug": "^2.0.3"
   },
   "devDependencies": {
     "mocha": "^5.2.0"
