@@ -2,7 +2,7 @@ language: node_js
 node_js:
   - 8
 before_install:
-  - npm install && npm install -g mocha
+  - npm install 
   - export NODE_ENV=production
 script:
   - npm run test
