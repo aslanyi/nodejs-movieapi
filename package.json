@@ -21,7 +21,7 @@
     "mocha": "^5.2.0"
   },
   "scripts": {
-    "test": "mocha",
+    "test": "mocha --exit --recursive",
     "start": "node app.js"
   },
   "repository": {
