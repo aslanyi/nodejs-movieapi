@@ -6,7 +6,7 @@ const User = require('../models/User');
 
 const jwt = require('jsonwebtoken');
 router.get('/',(req,res,next)=>{
-       res.send('<h1>get user deploy test</h1>'); 
+       res.send('<h1>get user deploy test </h1>'); 
 })
 
 router.post('/register',(req,res,next)=>{ 
