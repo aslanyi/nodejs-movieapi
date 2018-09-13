@@ -1,6 +1,9 @@
 {
   "name": "nodejs-movieapi",
   "version": "1.0.0",
+  "engines": {
+    "node": "8.11.3"
+  },
   "description": "Movie API\r İlk NodeJS Uygulaması",
   "main": "app.js",
   "directories": {
