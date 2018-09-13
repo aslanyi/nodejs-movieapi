@@ -1,5 +1,5 @@
-install: node_js
-node_js:
+install: nodejs
+nodejs:
   - "8"
 before_install:
   - npm install
